@@ -11,6 +11,7 @@
 <form action="businessmanUpdate.do" method="post">
 	<fieldset>
 		<legend>상품기본사항</legend>
+		0.상품번호: <input type="number" name="itemID" value="${item.itemID}" readonly><br>
 		1.상품이름: <textarea name="itemName">${item.itemName}</textarea><br>
 		2.상품정보: <textarea name="itemInfo">${item.itemInfo}</textarea><br>
 		3.목표금액: <input type="number" name="targetAmount" value="${item.targetAmount}" readonly><br>
@@ -19,5 +20,9 @@
 	</fieldset>
 	<input type="submit" value="수정완료">
 </form>
+<script>
+var message = "${updateResult}";
+if(message != "") alert(message);
+</script>
 </body>
 </html>

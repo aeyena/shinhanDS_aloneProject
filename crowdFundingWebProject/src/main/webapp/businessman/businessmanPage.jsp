@@ -17,6 +17,7 @@ List<CrowdFundItem> ilist = (List<CrowdFundItem>)request.getAttribute("ilist");
 </head>
 <body>
 <p>${businessman.businessmanName}님 환영합니다</p>
+<button onclick="location.href='#'">상품등록하기</button>
 <p>나의상품조회</p>
 	<table border="1">
 		<thead>
@@ -45,7 +46,7 @@ List<CrowdFundItem> ilist = (List<CrowdFundItem>)request.getAttribute("ilist");
 			<td><%=item.getCollectedAmount()%></td>
 			<td><%=item.getPercentage()%></td>
 			<td><button onclick="location.href='businessmanUpdate.do?itemid=<%=item.getItemID()%>';">수정</button></td>
-			<td><button onclick="">삭제</button></td>
+			<td><button onclick="location.href='businessmanDelete.do?itemid=<%=item.getItemID()%>';">삭제</button></td>
 		</tr>
 		<%
 		}

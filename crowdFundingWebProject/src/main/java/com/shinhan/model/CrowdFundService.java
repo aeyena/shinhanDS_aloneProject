@@ -73,6 +73,10 @@ public class CrowdFundService {
 	public CrowdFundItem selectByitemId(int itemID) {
 		return dao.selectByitemId(itemID);
 	}
+	
+	public int updateItem(CrowdFundItem item) {
+		return dao.updateItem(item);
+	}
 
 	
 }

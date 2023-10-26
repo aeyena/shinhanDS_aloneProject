@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.shinhan.dto.CrowdFundItem;
 import com.shinhan.model.CrowdFundService;
 
 /**
@@ -36,6 +37,31 @@ public class BusinessmanUpdateServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		
+		HttpSession session = request.getSession();
+		String businessmanId = (String)session.getAttribute("businessmanId");
+		
+		int itemID = Integer.parseInt(request.getParameter("itemID"));
+		String itemName = request.getParameter("itemName");
+		String itemInfo = request.getParameter("itemInfo");
+		int targetAmount = Integer.parseInt(request.getParameter("targetAmount"));
+		int collectedAmount = Integer.parseInt(request.getParameter("collectedAmount"));
+		float percentage = Float.parseFloat(request.getParameter("percentage"));
+		
+		
+		CrowdFundItem item = new CrowdFundItem(businessmanId,itemID,itemName,itemInfo,targetAmount,collectedAmount,percentage);
+		CrowdFundService service = new CrowdFundService();
+		int result = service.updateItem(item);
+		
+		if (result==0) {
+			session.setAttribute("updateResult", "다시 수정해주세요");
+			response.sendRedirect("businessmanUpdate.do");
+			return;
+		}
+		
+		session.setAttribute("updateResult", "");
+		response.sendRedirect("businessmanPage.do");
+		
 		
 		
 	}
