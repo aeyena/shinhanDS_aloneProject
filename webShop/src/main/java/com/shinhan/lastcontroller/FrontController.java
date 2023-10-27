@@ -20,15 +20,20 @@ import com.shinhan.util.DateUtil;
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	//요청방식: get,post
 		String method = request.getMethod();
+		//요청주소
 		String reqPath = request.getServletPath();
+		//요청마다 저장하는 데이터가 다르다 
 		Map<String,Object> data = new HashMap<>();
+		//모든요청마다 업무로직을 담당하는 controller를 만듦
 		CommonController controller = null;
 		
 		System.out.println("FrontController..." + reqPath);
 		data.put("method", method);
+		
+		//요청의 주소에 따라 업무로직을 호출한다
 		switch(reqPath) {
 		case "/emp/empList.do":
 			controller = new EmpListController();
@@ -37,6 +42,14 @@ public class FrontController extends HttpServlet {
 			controller = new EmpInsertContoller();
 			if(method.equalsIgnoreCase("post")) {
 				data.put("emp", makeEmp(request));
+			}
+			break;
+		case "/emp/empDetail.do":
+			controller = new EmpDetailContoller();
+			if(method.equalsIgnoreCase("post")) {
+				data.put("emp", makeEmp(request));
+			}else {
+				data.put("empid",request.getParameter("empid"));
 			}
 			break;
 		default:
@@ -50,7 +63,7 @@ public class FrontController extends HttpServlet {
 			request.setAttribute(key,data.get(key));
 		}
 		
-		if(page.startsWith("redirect")) {
+		if(page.startsWith("redirect:")) {
 			response.sendRedirect(page.substring(9));
 		}else {
 			RequestDispatcher rd = request.getRequestDispatcher(page);

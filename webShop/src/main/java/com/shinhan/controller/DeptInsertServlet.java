@@ -13,9 +13,7 @@ import com.shinhan.dto.DeptVO;
 import com.shinhan.model.DeptService;
 import com.shinhan.model.EmpService;
 
-/**
- * Servlet implementation class DeptInsertServlet
- */
+
 @WebServlet("/dept/deptInsert.do")
 public class DeptInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

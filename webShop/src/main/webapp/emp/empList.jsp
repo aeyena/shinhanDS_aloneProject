@@ -1,11 +1,9 @@
-<%@page import="java.util.List"%>
-<%@page import="com.shinhan.dto.EmpVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%
-List<EmpVO> emplist = (List<EmpVO>) request.getAttribute("emplist");
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -176,7 +174,12 @@ tbody {
 </script>
 </head>
 <body>
-	<a href="../auth/logout.do">로그아웃</a>
+	<!-- 1)인클루드 디렉티브 태그: 합쳐서 자바로 만듦 -->
+	<%@ include file="../auth/logout.jsp"%>
+
+	<!-- 2)jsp표준태그: 각각을 자바파일로 만듦(변수공유불가) -->
+	<%-- <jsp:include page="../auth/logout.jsp"></jsp:include> --%>
+
 	<div>
 		<input id="fname">
 		<button id="search1">시작하는 이름찾기</button>
@@ -185,7 +188,7 @@ tbody {
 		<button id="search3">&gt;=급여찾기2</button>
 		<br>
 		<button id="reload">reset</button>
-		<p>${empInfo.first_name}님환영합니다</p>
+
 	</div>
 	<!--  	
 	<div>
@@ -214,34 +217,34 @@ tbody {
 				</tr>
 			</thead>
 			<tbody>
-				<%
-				int i = 0;
-				for (EmpVO emp : emplist) {
-					i++;
-				%>
-
-				<tr seq="<%=i%>">
-					<td class="aa"><%=i%></td>
-					<td><a href="empDetail.do?empid=<%=emp.getEmployee_id()%>">
-							<%=emp.getEmployee_id()%>
-					</a></td>
-					<td fname="<%=emp.getFirst_name()%>"><%=emp.getFirst_name()%></td>
-					<td><%=emp.getLast_name()%></td>
-					<td><%=emp.getEmail()%></td>
-					<td><%=emp.getPhone_number()%></td>
-					<td><%=emp.getSalary()%></td>
-					<td><%=emp.getJob_id()%></td>
-					<td><%=emp.getDepartment_id()%></td>
-					<td><%=emp.getManager_id()%></td>
-					<td><%=emp.getCommission_pct()%></td>
-					<td><%=emp.getHire_date()%></td>
-				</tr>
-
-				<%
-				}
-				%>
+				<c:forEach items="${emplist}" var="emp" varStatus="status">
+					<tr seq="${status.count}">
+						<td class="aa">${status.count}</td>
+						<td><a href="empDetail.do?empid=${emp.employee_id}">
+								${emp.employee_id}
+						</a></td>
+						<td fname="${emp.first_name}">${emp.first_name}</td>
+						<td>${emp.last_name}</td>
+						<td>${emp.email}</td>
+						<td>${emp.phone_number}</td>
+						<td>
+						<fmt:formatNumber groupingUsed="true" value="${emp.salary}"/>
+						</td>
+						<td>${fn:toLowerCase(emp.job_id)}</td>
+						<td>${emp.department_id}</td>
+						<td>${emp.manager_id}</td>
+						<td>${emp.commission_pct}</td>
+						<td>${emp.hire_date}</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
+	<script>
+		var str = "${param.message}"
+		if (str != "") {
+			alert(str);
+		}
+	</script>
 </body>
 </html>

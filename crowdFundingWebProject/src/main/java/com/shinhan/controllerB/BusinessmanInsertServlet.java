@@ -14,20 +14,16 @@ import com.shinhan.dto.CrowdFundItem;
 import com.shinhan.model.CrowdFundService;
 
 
-@WebServlet("/businessman/businessmanUpdate.do")
-public class BusinessmanUpdateServlet extends HttpServlet {
+@WebServlet("/businessman/businessmanInsert.do")
+public class BusinessmanInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int itemId = Integer.parseInt(request.getParameter("itemid"));
-		CrowdFundService service = new CrowdFundService();
-		request.setAttribute("item", service.selectByitemId(itemId));
-		
 		RequestDispatcher rd;
-		rd = request.getRequestDispatcher("businessmanUpdate.jsp");
+		rd = request.getRequestDispatcher("itemInsert.jsp");
 		rd.forward(request, response);
+		
 	}
 
 	
@@ -37,28 +33,23 @@ public class BusinessmanUpdateServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String businessmanId = (String)session.getAttribute("businessmanId");
 		
-		int itemID = Integer.parseInt(request.getParameter("itemID"));
 		String itemName = request.getParameter("itemName");
 		String itemInfo = request.getParameter("itemInfo");
 		int targetAmount = Integer.parseInt(request.getParameter("targetAmount"));
-		int collectedAmount = Integer.parseInt(request.getParameter("collectedAmount"));
-		float percentage = Float.parseFloat(request.getParameter("percentage"));
 		
-		
-		CrowdFundItem item = new CrowdFundItem(businessmanId,itemID,itemName,itemInfo,targetAmount,collectedAmount,percentage);
 		CrowdFundService service = new CrowdFundService();
-		int result = service.updateItem(item);
+		CrowdFundItem item = new CrowdFundItem(businessmanId,itemName,itemInfo,targetAmount);
+		int result = service.registerItem(item);
 		
 		if (result==0) {
-			session.setAttribute("updateResult", "다시 수정해주세요");
-			response.sendRedirect("businessmanUpdate.do");
+			session.setAttribute("insertResult", "다시 등록해주세요");
+			response.sendRedirect("businessmanInsert.do");
 			return;
 		}
 		
-		session.setAttribute("updateResult", "");
+		session.setAttribute("insertResult", "");
 		response.sendRedirect("businessmanPage.do");
-		
-		
+		 
 		
 	}
 

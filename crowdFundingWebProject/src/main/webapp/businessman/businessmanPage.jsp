@@ -2,11 +2,10 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-<%
-List<CrowdFundItem> ilist = (List<CrowdFundItem>)request.getAttribute("ilist");
 
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -17,7 +16,7 @@ List<CrowdFundItem> ilist = (List<CrowdFundItem>)request.getAttribute("ilist");
 </head>
 <body>
 <p>${businessman.businessmanName}님 환영합니다</p>
-<button onclick="location.href='#'">상품등록하기</button>
+<button onclick="location.href='businessmanInsert.do'">상품등록하기</button>
 <p>나의상품조회</p>
 	<table border="1">
 		<thead>
@@ -33,24 +32,23 @@ List<CrowdFundItem> ilist = (List<CrowdFundItem>)request.getAttribute("ilist");
 			</tr>
 		</thead>
 		<tbody>
-		<%
-		int i=0;
-		for(CrowdFundItem item:ilist){
-			i++;
-		%>
+		<c:forEach items="${ilist}" var="item">
 		<tr>
-			<td><%=item.getItemID()%></td>
-			<td><%=item.getItemName()%></td>
-			<td><%=item.getItemInfo()%></td>
-			<td><%=item.getTargetAmount()%></td>
-			<td><%=item.getCollectedAmount()%></td>
-			<td><%=item.getPercentage()%></td>
-			<td><button onclick="location.href='businessmanUpdate.do?itemid=<%=item.getItemID()%>';">수정</button></td>
-			<td><button onclick="location.href='businessmanDelete.do?itemid=<%=item.getItemID()%>';">삭제</button></td>
+		<td>${item.itemID}</td>
+		<td>${item.itemName}</td>
+		<td>${item.itemInfo}</td>
+		<td>
+		<fmt:formatNumber groupingUsed="true" value="${item.targetAmount}"/>
+		</td>
+		<td>
+		<fmt:formatNumber groupingUsed="true" value="${item.collectedAmount}"/>
+		</td>
+		<td>${item.percentage}</td>
+		<td><button onclick="location.href='businessmanUpdate.do?itemid=${item.itemID}';">수정</button></td>
+		<td><button onclick="location.href='businessmanDelete.do?itemid=${item.itemID}';">삭제</button></td>
 		</tr>
-		<%
-		}
-		%>
+		</c:forEach>
+		
 		</tbody>
 	</table>
 	<button onclick="location.href='businessmanLogout.do'">로그아웃</button>

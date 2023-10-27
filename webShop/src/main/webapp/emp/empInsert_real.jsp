@@ -59,6 +59,7 @@ legend{
 </head>
 
 <body>
+<%@ include file="../auth/logout.jsp" %>
 	<div id="container">
 		<h1>직원등록</h1>
 		<form action="empInsert.do" method="post">

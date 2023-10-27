@@ -4,6 +4,17 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
 	id="WebApp_ID" version="4.0">
 
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error/error_404.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error/error_500.jsp</location>
+	</error-page>
+	
 	<filter>
 		<filter-name>timeF</filter-name>
 		<filter-class>com.shinhan.filter.TimeCheckFilter</filter-class>

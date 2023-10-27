@@ -41,7 +41,7 @@
 						<input type="password" class="input" name="businessmanPW">
 					</div>
 				</div>
-				<a href="#">회원가입</a> 
+				<a href="businessmanJoin.do">회원가입</a> 
 				<input type="submit" class="btn" value="Login">
 			</form>
 		</div>

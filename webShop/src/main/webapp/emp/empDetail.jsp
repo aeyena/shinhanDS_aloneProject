@@ -56,6 +56,7 @@
 
 <body>
     <div id="container">
+    <%@ include file="../auth/logout.jsp" %>
 	<h1>~상세보기~</h1>
 	<form name="empform" action="empDetail.do" method="post">
 		<fieldset>
