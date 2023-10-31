@@ -15,14 +15,11 @@ import com.shinhan.dto.CrowdFundBusinessman;
 import com.shinhan.dto.CrowdFundItem;
 import com.shinhan.model.CrowdFundService;
 
-/**
- * Servlet implementation class BusinessmanPageServlet
- */
+
 @WebServlet("/businessman/businessmanPage.do")
 public class BusinessmanPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
@@ -43,10 +40,4 @@ public class BusinessmanPageServlet extends HttpServlet {
 		rd.forward(request, response);
 		
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

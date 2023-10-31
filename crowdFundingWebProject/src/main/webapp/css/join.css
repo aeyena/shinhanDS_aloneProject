@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+#join-legend {
+	margin-top: 40px;
+	text-align: center;
+	font-size: 2em;
+	margin-bottom: 20px;
+}
+
+#join-div{
+	margin: 40px;
+}
+
+#join-button{
+	display: inline-block;
+	margin-top: 30px;
+	float: right;
+}

@@ -58,7 +58,7 @@ public class CrowdFundService {
 		return dao.bLogin(businessmanId,businessmanPw);
 	}
 
-	public boolean iLogin(String investorId, String investorPw) {
+	public CrowdFundInvestor iLogin(String investorId, String investorPw) {
 		return dao.iLogin(investorId,investorPw);
 	}
 

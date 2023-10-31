@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+#logout-a {
+	color: white;
+}
+
+a img {
+	width: 25px;
+	height: 25px;
+}
+
+/*
+body{
+	background-color: #6DC1D2;
+}
+*/
+
+#balance-card {
+	width: 30%;
+	margin: 150px auto;
+}
+
+#balance-div {
+	font-size: 30px;
+}
+
+.card-title {
+	margin-top: 20px;
+}
+
+#balance-img {
+	width: 45px;
+	height: 45px;
+	margin-top: 30px;
+}
+
+#balance-p {
+	display: inline-block;
+	margin-top: 20px;
+	margin-left: 70px;
+	font-size: 40px;
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-position: under;
+}
+
+#balance-div2 {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+#balance-div3 {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 30px;
+}
+
+#balance-input{
+	width: 450px;
+	margin: 10px auto;
+}

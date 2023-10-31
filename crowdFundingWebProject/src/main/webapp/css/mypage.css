@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+#logout-a{
+	color:white;
+}
+
+a img{
+	width:25px;
+	height:25px;
+}
+
+#mypage-div1{
+	margin: 40px;
+}
+
+#mypage-div2{
+	margin-top: 40px; 
+	text-align: center; 
+	font-size: 2em; 
+	margin-bottom: 50px;
+}
+
+tr th, tr td{
+	text-align: center;
+}
+
+#itemName{
+	word-break: break-all;
+	width: 500px;
+}
+
+#itemInfo{
+	word-break: break-all;
+	width: 900px;
+}

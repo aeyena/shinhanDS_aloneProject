@@ -12,7 +12,7 @@ import com.shinhan.dto.CrowdFundBusinessman;
 import com.shinhan.dto.CrowdFundFunding;
 import com.shinhan.dto.CrowdFundInvestor;
 import com.shinhan.dto.CrowdFundItem;
-import com.shinhan.util.DBUtilBefore;
+import com.shinhan.util.DBUtil;
 
 public class CrowdFundDAO {
 
@@ -24,7 +24,7 @@ public class CrowdFundDAO {
 	public int bJoinMembership(CrowdFundBusinessman businessman) {
 		String sql = "insert into businessman values(?,?,?)";
 		int count = 0;
-		conn = DBUtilBefore.getConnection();
+		conn = DBUtil.getConnection();
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, businessman.getBusinessmanID());
@@ -34,7 +34,7 @@ public class CrowdFundDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtilBefore.dbDisconnect(conn, pst, rs);
+			DBUtil.dbDisconnect(conn, pst, rs);
 		}
 		return count;
 	}
@@ -42,7 +42,7 @@ public class CrowdFundDAO {
 	public int registerItem(CrowdFundItem item) {
 		String sql = "insert into item values(seq_01.NEXTVAL,?,?,?,?,?,?)";
 		int count = 0;
-		conn = DBUtilBefore.getConnection();
+		conn = DBUtil.getConnection();
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, item.getItemName());
@@ -55,7 +55,7 @@ public class CrowdFundDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtilBefore.dbDisconnect(conn, pst, rs);
+			DBUtil.dbDisconnect(conn, pst, rs);
 		}
 		return count;
 	}
@@ -63,7 +63,7 @@ public class CrowdFundDAO {
 	public int deleteItem(int itemId) {
 		String sql = "delete from item where itemid=?";
 		int count = 0;
-		conn = DBUtilBefore.getConnection();
+		conn = DBUtil.getConnection();
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setInt(1, itemId);
@@ -71,7 +71,7 @@ public class CrowdFundDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtilBefore.dbDisconnect(conn, pst, rs);
+			DBUtil.dbDisconnect(conn, pst, rs);
 		}
 		return count;
 	}
@@ -79,7 +79,7 @@ public class CrowdFundDAO {
 	public int iJoinMembership(CrowdFundInvestor investor) {
 		String sql = "insert into investor values(?,?,?,?)";
 		int count = 0;
-		conn = DBUtilBefore.getConnection();
+		conn = DBUtil.getConnection();
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, investor.getInvestorID());
@@ -90,7 +90,7 @@ public class CrowdFundDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtilBefore.dbDisconnect(conn, pst, rs);
+			DBUtil.dbDisconnect(conn, pst, rs);
 		}
 		return count;
 	}
@@ -98,7 +98,7 @@ public class CrowdFundDAO {
 	public List<CrowdFundItem> selectAll() {
 		List<CrowdFundItem> clist = new ArrayList<CrowdFundItem>();
 		String sql = "select * from item";
-		conn = DBUtilBefore.getConnection();
+		conn = DBUtil.getConnection();
 		try {
 			st = conn.createStatement();
 			rs = st.executeQuery(sql);
@@ -109,7 +109,7 @@ public class CrowdFundDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtilBefore.dbDisconnect(conn, st, rs);
+			DBUtil.dbDisconnect(conn, st, rs);
 		}
 		return clist;
 	}
@@ -129,7 +129,7 @@ public class CrowdFundDAO {
 	public List<CrowdFundItem> selectByBid(String businessmanId) {
 		List<CrowdFundItem> clist = new ArrayList<CrowdFundItem>();
 		String sql = "select * from item where trim(businessmanId) = ?";
-		conn = DBUtilBefore.getConnection();
+		conn = DBUtil.getConnection();
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, businessmanId);
@@ -141,7 +141,7 @@ public class CrowdFundDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtilBefore.dbDisconnect(conn, pst, rs);
+			DBUtil.dbDisconnect(conn, pst, rs);
 		}
 		return clist;
 	}
@@ -149,7 +149,7 @@ public class CrowdFundDAO {
 	public int insertFunding(CrowdFundFunding funding) {
 		String sql = "insert into funding values (?,?,?)";
 		int count = 0;
-		conn = DBUtilBefore.getConnection();
+		conn = DBUtil.getConnection();
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, funding.getInvestorID());
@@ -159,15 +159,15 @@ public class CrowdFundDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtilBefore.dbDisconnect(conn, pst, rs);
+			DBUtil.dbDisconnect(conn, pst, rs);
 		}
 		return count;
 	}
 
 	public List<CrowdFundFunding> checkFunding(String investorId) {
 		List<CrowdFundFunding> clist = new ArrayList<CrowdFundFunding>();
-		String sql = "select * from funding where trim(investorId) = ?";
-		conn = DBUtilBefore.getConnection();
+		String sql = "select * from funding where trim(investorId) = ? order by itemID";
+		conn = DBUtil.getConnection();
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, investorId);
@@ -179,7 +179,7 @@ public class CrowdFundDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtilBefore.dbDisconnect(conn, pst, rs);
+			DBUtil.dbDisconnect(conn, pst, rs);
 		}
 		return clist;
 	}
@@ -195,8 +195,9 @@ public class CrowdFundDAO {
 	public List<CrowdFundItem> selectByIid(String investorId) {
 		List<CrowdFundItem> clist = new ArrayList<CrowdFundItem>();
 		String sql = "select i.* " + "from item i inner join funding f on(i.itemID=f.itemID) "
-				+ "where trim(investorID) = ?";
-		conn = DBUtilBefore.getConnection();
+				+ "where trim(investorID) = ? "
+				+ "order by i.itemID";
+		conn = DBUtil.getConnection();
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, investorId);
@@ -208,7 +209,7 @@ public class CrowdFundDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtilBefore.dbDisconnect(conn, pst, rs);
+			DBUtil.dbDisconnect(conn, pst, rs);
 		}
 		return clist;
 	}
@@ -216,7 +217,7 @@ public class CrowdFundDAO {
 	public CrowdFundInvestor checkBalance(String investorId) {
 		String sql = "select * from investor where trim(investorId) = ?";
 		CrowdFundInvestor investor = null;
-		conn = DBUtilBefore.getConnection();
+		conn = DBUtil.getConnection();
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, investorId);
@@ -227,7 +228,7 @@ public class CrowdFundDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtilBefore.dbDisconnect(conn, st, rs);
+			DBUtil.dbDisconnect(conn, st, rs);
 		}
 		return investor;
 	}
@@ -244,7 +245,7 @@ public class CrowdFundDAO {
 	public int chargeAmount(String investorId, int amount) {
 		String sql = "update investor set recharge = recharge + ? where trim(investorId) = ?";
 		int count = 0;
-		conn = DBUtilBefore.getConnection();
+		conn = DBUtil.getConnection();
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setInt(1, amount);
@@ -253,7 +254,7 @@ public class CrowdFundDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtilBefore.dbDisconnect(conn, pst, rs);
+			DBUtil.dbDisconnect(conn, pst, rs);
 		}
 		return count;
 	}
@@ -261,7 +262,7 @@ public class CrowdFundDAO {
 	public CrowdFundBusinessman bLogin(String businessmanId, String businessmanPw) {
 		CrowdFundBusinessman businessman = null;
 		String sql = "select * from businessman " + "where trim(businessmanId)=? and trim(businessmanPw)=?";
-		conn = DBUtilBefore.getConnection();
+		conn = DBUtil.getConnection();
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, businessmanId);
@@ -273,7 +274,7 @@ public class CrowdFundDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtilBefore.dbDisconnect(conn, pst, rs);
+			DBUtil.dbDisconnect(conn, pst, rs);
 		}
 		return businessman;
 	}
@@ -286,30 +287,30 @@ public class CrowdFundDAO {
 		return businessman;
 	}
 
-	public boolean iLogin(String investorId, String investorPw) {
-		boolean isLogin = false;
+	public CrowdFundInvestor iLogin(String investorId, String investorPw) {
+		CrowdFundInvestor investor = null;
 		String sql = "select * from investor " + "where trim(investorId)=? and trim(investorPw)=?";
-		conn = DBUtilBefore.getConnection();
+		conn = DBUtil.getConnection();
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, investorId);
 			pst.setString(2, investorPw);
 			rs = pst.executeQuery();
 			if (rs.next()) {
-				isLogin = true;
+				investor = makeInvestor(rs);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtilBefore.dbDisconnect(conn, pst, rs);
+			DBUtil.dbDisconnect(conn, pst, rs);
 		}
-		return isLogin;
+		return investor;
 	}
 
 	public List<CrowdFundItem> selectByPopularity() {
 		List<CrowdFundItem> clist = new ArrayList<CrowdFundItem>();
 		String sql = "select * from item order by percentage desc";
-		conn = DBUtilBefore.getConnection();
+		conn = DBUtil.getConnection();
 		try {
 			st = conn.createStatement();
 			rs = st.executeQuery(sql);
@@ -320,7 +321,7 @@ public class CrowdFundDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtilBefore.dbDisconnect(conn, st, rs);
+			DBUtil.dbDisconnect(conn, st, rs);
 		}
 		return clist;
 	}
@@ -328,7 +329,7 @@ public class CrowdFundDAO {
 	public List<CrowdFundItem> selectBySearch(String search) {
 		List<CrowdFundItem> clist = new ArrayList<CrowdFundItem>();
 		String sql = "select * from item where itemName like '%'||?||'%'";
-		conn = DBUtilBefore.getConnection();
+		conn = DBUtil.getConnection();
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, search);
@@ -346,7 +347,7 @@ public class CrowdFundDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtilBefore.dbDisconnect(conn, pst, rs);
+			DBUtil.dbDisconnect(conn, pst, rs);
 		}
 		return clist;
 	}
@@ -354,7 +355,7 @@ public class CrowdFundDAO {
 	public CrowdFundItem selectByitemId(int itemID) {
 		CrowdFundItem item = new CrowdFundItem();
 		String sql = "select * from item where itemId = ?";
-		conn = DBUtilBefore.getConnection();
+		conn = DBUtil.getConnection();
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setInt(1, itemID);
@@ -365,7 +366,7 @@ public class CrowdFundDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtilBefore.dbDisconnect(conn, pst, rs);
+			DBUtil.dbDisconnect(conn, pst, rs);
 		}
 		return item;
 	}
@@ -374,7 +375,7 @@ public class CrowdFundDAO {
 
 		String sql = "update item set itemName=?, itemInfo=? where itemID=?";
 		int count = 0;
-		conn = DBUtilBefore.getConnection();
+		conn = DBUtil.getConnection();
 
 		try {
 			pst = conn.prepareStatement(sql);
@@ -385,7 +386,7 @@ public class CrowdFundDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtilBefore.dbDisconnect(conn, pst, rs);
+			DBUtil.dbDisconnect(conn, pst, rs);
 		}
 		return count;
 	}

@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+#logout-a{
+	color:white;
+}
+
+a img{
+	width:25px;
+	height:25px;
+}
+
+#page-div1{
+	margin: 40px;
+}
+
+#page-div2{
+	margin-top: 40px; 
+	text-align: center; 
+	font-size: 2em; 
+	margin-bottom: 10px;
+}
+
+tr th, tr td{
+	text-align: center;
+}
+
+#itemName{
+	word-break: break-all;
+	width: 500px;
+}
+
+#itemInfo{
+	word-break: break-all;
+	width: 900px;
+}
+
+#itemNameB{
+	word-break: break-all;
+	width: 450px;
+}
+
+#itemInfoB{
+	word-break: break-all;
+	width: 850px;
+}
+
+#page-table{
+	margin-bottom: 0;
+}
+
+.d-flex{
+	float: right;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.form-control{
+	width: 600px;
+}
+
+#btn-div{
+	float: right;
+}
+
+#funding-input1{
+	width: 450px;
+	margin: 10px auto;
+}
+
+#funding-input2{
+	width: 450px;
+	margin: 10px auto;
+}
+

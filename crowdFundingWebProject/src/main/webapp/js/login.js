@@ -19,6 +19,4 @@ inputs.forEach(input => {
   input.addEventListener("blur", remcl);
 });
 
-
-
 //Source :- https://github.com/sefyudem/Responsive-Login-Form/blob/master/img/avatar.svg
