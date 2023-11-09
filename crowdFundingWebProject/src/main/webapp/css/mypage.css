@@ -1,5 +1,14 @@
 @charset "UTF-8";
 
+@font-face {
+  font-family: Jua;
+  src: url('../fonts/Jua-Regular.ttf'); 
+}
+
+body, .navbar, .btn, .dropdown-item{
+	font-family: 'Jua', sans-serif;
+}
+
 #logout-a{
 	color:white;
 }
@@ -26,10 +35,10 @@ tr th, tr td{
 
 #itemName{
 	word-break: break-all;
-	width: 500px;
+	width: 400px;
 }
 
 #itemInfo{
 	word-break: break-all;
-	width: 900px;
+	width: 650px;
 }

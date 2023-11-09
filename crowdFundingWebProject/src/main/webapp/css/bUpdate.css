@@ -1,5 +1,15 @@
 @charset "UTF-8";
 
+@font-face {
+  font-family: Jua;
+  src: url('../fonts/Jua-Regular.ttf'); 
+}
+
+body, .navbar, .btn, legend{
+	font-family: 'Jua', sans-serif;
+}
+
+
 #update-legend {
 	margin-top: 40px;
 	text-align: center;

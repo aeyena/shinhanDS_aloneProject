@@ -1,5 +1,14 @@
 @charset "UTF-8";
 
+@font-face {
+  font-family: Jua;
+  src: url('../fonts/Jua-Regular.ttf'); 
+}
+
+body, .navbar, .btn, .dropdown-item, .card-title{
+	font-family: 'Jua', sans-serif;
+}
+
 #logout-a {
 	color: white;
 }
@@ -26,6 +35,7 @@ body{
 
 .card-title {
 	margin-top: 20px;
+	font-size: 35px;
 }
 
 #balance-img {

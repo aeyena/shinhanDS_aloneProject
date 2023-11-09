@@ -22,8 +22,8 @@ button {
 	height: 500px;
 	margin-right: 50px;
 	margin-left: 50px;
-	/*background-color: transparent;*/
-	background-color: lightblue;
+	background-color: transparent;
+	/*background-color: lightblue;*/
 	border: whitesmoke;
 	border-radius: 10px;
 }

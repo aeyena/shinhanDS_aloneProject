@@ -1,17 +1,23 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css?family=Poppins:600&display=swap');
+
+@font-face {
+  font-family: Jua;
+  src: url('../fonts/Jua-Regular.ttf'); 
+}
+
 
 *{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  
+  font-family: 'Jua', sans-serif;  
 }
 
 body{
-    font-family: 'Poppins', sans-serif;
-    overflow: hidden;
+	overflow: hidden;
 }
+
+
 
 
 .wave{
